@@ -1,0 +1,5 @@
+lower = "qwertyuiopasdfghjklzxcvbnm" 
+upper = "QWERTYUIOPASDFGHJKLZXCVBNM" 
+num = "" 
+special = "" 
+ambigious = "()_+|}[;'/:][{" 

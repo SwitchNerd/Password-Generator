@@ -1,4 +1,5 @@
 import random
+flag = False
 
 #lists
 lowerchars = "qwertyuiopasdfghjklzxcvbnm"
@@ -7,35 +8,68 @@ numbers = "1234567890"
 specialchars = "!@#$%^?.,&*"
 unclassed = "()_+|}[;'/:][{"
 
+def main():
 
-#inputs
-length = int(input("Length of selection?: "))
+    dec = input("Would you like to looad prefer preferences? (y/n): ")
+    if dec == 'y':
+        from prefer import lower, upper, num, special, ambigious
+        flag = True
+        length = int(input("Length of selection?: "))
+    else:
 
-print("For each answer with y/n")
+        #inputs
+        length = int(input("Length of selection?: "))
+        
+        lower = str(input("Lower case characters included?: "))
+        upper = str(input("Upper case characters included?: "))
+        num = str(input("Numbers included?: "))
+        special = str(input("Special characters included? (!@#$%^?.,&*): "))
+        ambigious = str(input("Ambigious characters included? (()_+|}[;'/:][{:): "))
 
-lower = str(input("Lower case characters included?: ")).lower
-upper = str(input("Upper case characters included?: ")).lower
-num = str(input("Numbers included?: ")).lower
-special = str(input("Special characters included? (!@#$%^?.,&*): ")).lower
-ambigious = str(input("Ambigious characters included? (()_+|}[;'/:][{:): ")).lower
+        if lower == 'y': 
+            lower = lowerchars
+        else:
+            lower = ''
+        if upper == 'y':
+            upper = upperchars
+        else:
+            upper = ''
+        if num == 'y':
+            num = numbers
+        else: 
+            num = ''
+        if special == 'y':
+            special = specialchars
+        else:
+            special = ''
+        if ambigious == 'y':
+            ambigious = unclassed
+        else:
+            ambigious = ''
 
-selection = ''
+        
+    s = ''
+    password = ''
+    s = lower + upper + num + special + ambigious
+    for i in range (length):
+        password += random.choice(s)
 
-if lower == 'y': 
-    selection = lowerchars
-if upper == 'y':
-    selection = ''.join([selection, upperchars])
-if num == 'y':
-    selection = ''.join([selection, numbers])
-if special == 'y':
-    selection = ''.join([selection, specialchars])
-if ambigious == 'y':
-    selection = ''.join([selection, unclassed])
+    print('--------------------------------------------')
+    print(password)
+    print('--------------------------------------------')\
+    
+    if flag == False:
+        option = input('Would you like to save these preferences?: (y/n): ')
+        if option == 'y':
+            creatnew(lower, upper, num, special, ambigious)
+    
 
-print(selection)
+def creatnew(l,u,n,s,a):
+    with open("prefer.py", "w") as p:
+        p.write(f'lower = "{l}" \n')
+        p.write(f'upper = "{u}" \n')
+        p.write(f'num = "{n}" \n')
+        p.write(f'special = "{s}" \n')
+        p.write(f'ambigious = "{a}" \n')
 
-
-
-
-
-
+main()
